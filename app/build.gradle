@@ -1,0 +1,18 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.owner.juicesshofflinepro'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.owner.juicesshofflinepro'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '1.0'
+    }
+}
+
+dependencies {
+    compileOnly 'io.github.libxposed:api:101.0.1'
+}

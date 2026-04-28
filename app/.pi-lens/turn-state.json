@@ -1,0 +1,17 @@
+{
+  "files": {
+    "src/main/java/com/owner/juicesshofflinepro/JuiceSshOfflineProModule.java": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 122
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-04-28T18:15:01.880Z"
+    }
+  },
+  "turnCycles": 0,
+  "maxCycles": 3,
+  "lastUpdated": "2026-04-28T18:15:01.880Z"
+}

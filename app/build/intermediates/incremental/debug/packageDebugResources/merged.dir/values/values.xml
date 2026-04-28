@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JuiceSSH Offline Pro Fix</string>
+    <string name="module_description">Keeps your legitimate JuiceSSH Pro entitlement usable offline after the original Google/Sonelli verification path disappeared.</string>
+    <style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar"/>
+</resources>

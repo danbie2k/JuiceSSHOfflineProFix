@@ -1,0 +1,34 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:1-9:12
+	package
+		INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:3:5-8:43
+	android:extractNativeLibs
+		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:6:9-42
+	android:label
+		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:7:9-41
+	android:allowBackup
+		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:4:9-36
+	android:description
+		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:5:9-57
+	android:theme
+		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:8:9-40
+uses-sdk
+INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml
+INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml
