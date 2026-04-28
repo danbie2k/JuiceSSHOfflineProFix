@@ -14,6 +14,16 @@
         android:description="@string/module_description"
         android:extractNativeLibs="false"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" />
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        <meta-data
+            android:name="xposeddescription"
+            android:value="Keeps your legitimate JuiceSSH Pro entitlement usable offline." />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="82" />
+    </application>
 
 </manifest>

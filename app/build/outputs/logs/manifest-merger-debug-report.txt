@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:1-9:12
-INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:1-9:12
-INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:1-9:12
-INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:1-9:12
+ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:1-13:12
+INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:1-13:12
+INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:1-13:12
+INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:1-13:12
 	package
 		INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml
 	android:versionName
@@ -13,7 +13,7 @@ INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/Android
 	xmlns:android
 		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:2:11-69
 application
-ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:3:5-8:43
+ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:3:5-12:19
 	android:extractNativeLibs
 		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:6:9-42
 	android:label
@@ -24,6 +24,24 @@ ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidMan
 		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:5:9-57
 	android:theme
 		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:8:9-40
+meta-data#xposedmodule
+ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:9:9-71
+	android:value
+		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:9:48-68
+	android:name
+		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:9:20-47
+meta-data#xposeddescription
+ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:10:9-134
+	android:value
+		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:10:53-131
+	android:name
+		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:10:20-52
+meta-data#xposedminversion
+ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:11:9-73
+	android:value
+		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:11:52-70
+	android:name
+		ADDED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml:11:20-51
 uses-sdk
 INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/bob/juice/lsposed-juicessh-offline-pro/app/src/main/AndroidManifest.xml

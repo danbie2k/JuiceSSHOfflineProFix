@@ -5,119 +5,132 @@ import android.util.Log;
 
 import java.lang.reflect.Method;
 
-import io.github.libxposed.api.XposedInterface;
-import io.github.libxposed.api.XposedModule;
-import io.github.libxposed.api.XposedModuleInterface;
+import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.XC_MethodReplacement;
+import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-public final class JuiceSshOfflineProModule extends XposedModule {
+public final class JuiceSshOfflineProModule implements IXposedHookLoadPackage {
     private static final String TAG = "JuiceSSHOfflinePro";
     private static final String TARGET = "com.sonelli.juicessh";
+    private static final long TEN_YEARS_SECONDS = 315360000L;
 
     @Override
-    public void onModuleLoaded(XposedModuleInterface.ModuleLoadedParam param) {
-        log(Log.INFO, TAG, "module loaded; framework=" + getFrameworkName() + " api=" + getApiVersion());
-    }
-
-    @Override
-    public void onPackageReady(XposedModuleInterface.PackageReadyParam param) {
-        if (!TARGET.equals(param.getPackageName())) {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+        if (!TARGET.equals(lpparam.packageName)) {
             return;
         }
-        ClassLoader cl = param.getClassLoader();
-        log(Log.INFO, TAG, "hooking " + param.getPackageName());
-        hookProCheck(cl);
-        hookUserSignatureAndSession(cl);
-        hookApiUserGate(cl);
+        log("hooking " + lpparam.packageName);
+        hookProCheck(lpparam.classLoader);
+        hookUserSignatureAndSession(lpparam.classLoader);
+        hookApiUserGate(lpparam.classLoader);
     }
 
     private void hookProCheck(ClassLoader cl) {
         try {
-            Class<?> oi0 = Class.forName("com.sonelli.oi0", false, cl);
-            Method proCheck = oi0.getDeclaredMethod("d", Object.class);
-            proCheck.setAccessible(true);
-            hook(proCheck)
-                    .setPriority(XposedInterface.PRIORITY_HIGHEST)
-                    .setExceptionMode(XposedInterface.ExceptionMode.PROTECTIVE)
-                    .intercept(chain -> Boolean.TRUE);
-            log(Log.INFO, TAG, "hooked com.sonelli.oi0.d(Object) => true");
+            XposedHelpers.findAndHookMethod(
+                    "com.sonelli.oi0",
+                    cl,
+                    "d",
+                    Object.class,
+                    XC_MethodReplacement.returnConstant(Boolean.TRUE));
+            log("hooked com.sonelli.oi0.d(Object) => true");
         } catch (Throwable t) {
-            log(Log.ERROR, TAG, "failed to hook oi0.d", t);
+            log("failed to hook oi0.d", t);
         }
     }
 
     private void hookUserSignatureAndSession(ClassLoader cl) {
         try {
-            Class<?> user = userClass(cl);
-
-            Method signatureCheck = user.getDeclaredMethod("H");
-            signatureCheck.setAccessible(true);
-            hook(signatureCheck)
-                    .setPriority(XposedInterface.PRIORITY_HIGHEST)
-                    .setExceptionMode(XposedInterface.ExceptionMode.PROTECTIVE)
-                    .intercept(chain -> Boolean.TRUE);
-            log(Log.INFO, TAG, "hooked User.H() => true");
-
-            Method secondsUntilExpiry = user.getDeclaredMethod("w");
-            secondsUntilExpiry.setAccessible(true);
-            hook(secondsUntilExpiry)
-                    .setPriority(XposedInterface.PRIORITY_HIGHEST)
-                    .setExceptionMode(XposedInterface.ExceptionMode.PROTECTIVE)
-                    .intercept(chain -> 315360000L); // ten years, in seconds
-            log(Log.INFO, TAG, "hooked User.w() => ten years");
+            XposedHelpers.findAndHookMethod(
+                    "com.sonelli.juicessh.models.User",
+                    cl,
+                    "H",
+                    XC_MethodReplacement.returnConstant(Boolean.TRUE));
+            log("hooked User.H() => true");
         } catch (Throwable t) {
-            log(Log.ERROR, TAG, "failed to hook User methods", t);
+            log("failed to hook User.H", t);
         }
-    }
 
-    private void hookApiUserGate(ClassLoader cl) {
         try {
-            Class<?> api = Class.forName("com.sonelli.pi0", false, cl);
-            Class<?> callback = Class.forName("com.sonelli.pi0$p", false, cl);
-            Method currentUser = userClass(cl).getDeclaredMethod("A", Context.class);
-            currentUser.setAccessible(true);
-            Method onUser = callback.getDeclaredMethod("b", userClass(cl));
-            onUser.setAccessible(true);
-
-            Method hasPro = api.getDeclaredMethod("m", Context.class);
-            hasPro.setAccessible(true);
-            hook(hasPro)
-                    .setPriority(XposedInterface.PRIORITY_HIGHEST)
-                    .setExceptionMode(XposedInterface.ExceptionMode.PROTECTIVE)
-                    .intercept(chain -> Boolean.TRUE);
-            log(Log.INFO, TAG, "hooked pi0.m(Context) => true");
-
-            Method getUser = api.getDeclaredMethod("j", Context.class, callback);
-            getUser.setAccessible(true);
-            hook(getUser)
-                    .setPriority(XposedInterface.PRIORITY_HIGHEST)
-                    .setExceptionMode(XposedInterface.ExceptionMode.PROTECTIVE)
-                    .intercept(
-                            chain -> {
-                                Object cb = chain.getArg(1);
-                                if (cb == null) {
-                                    return null;
-                                }
-                                Object user = null;
-                                try {
-                                    Object ctx = chain.getArg(0);
-                                    if (ctx instanceof Context) {
-                                        user = currentUser.invoke(null, ctx);
-                                    }
-                                } catch (Throwable ignored) {
-                                }
-                                if (user == null) {
-                                    user = userClass(cl).getDeclaredConstructor().newInstance();
-                                }
-                                onUser.invoke(cb, user);
-                                return null;
-                            });
-            log(Log.INFO, TAG, "hooked pi0.j(Context,p) => local callback, no network refresh");
+            XposedHelpers.findAndHookMethod(
+                    "com.sonelli.juicessh.models.User",
+                    cl,
+                    "w",
+                    XC_MethodReplacement.returnConstant(TEN_YEARS_SECONDS));
+            log("hooked User.w() => ten years");
         } catch (Throwable t) {
-            log(Log.ERROR, TAG, "failed to hook API user gate", t);
+            log("failed to hook User.w", t);
         }
     }
 
-    private Class<?> userClass(ClassLoader cl) throws ClassNotFoundException {
-        return Class.forName("com.sonelli.juicessh.models.User", false, cl);
+    private void hookApiUserGate(final ClassLoader cl) {
+        try {
+            XposedHelpers.findAndHookMethod(
+                    "com.sonelli.pi0",
+                    cl,
+                    "m",
+                    Context.class,
+                    XC_MethodReplacement.returnConstant(Boolean.TRUE));
+            log("hooked pi0.m(Context) => true");
+        } catch (Throwable t) {
+            log("failed to hook pi0.m", t);
+        }
+
+        try {
+            Class<?> callbackClass = XposedHelpers.findClass("com.sonelli.pi0$p", cl);
+            XposedHelpers.findAndHookMethod(
+                    "com.sonelli.pi0",
+                    cl,
+                    "j",
+                    Context.class,
+                    callbackClass,
+                    new XC_MethodReplacement() {
+                        @Override
+                        protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+                            Object callback = param.args[1];
+                            if (callback == null) {
+                                return null;
+                            }
+
+                            Object user = null;
+                            try {
+                                if (param.args[0] instanceof Context) {
+                                    user = XposedHelpers.callStaticMethod(
+                                            XposedHelpers.findClass("com.sonelli.juicessh.models.User", cl),
+                                            "A",
+                                            param.args[0]);
+                                }
+                            } catch (Throwable ignored) {
+                            }
+
+                            if (user == null) {
+                                user = XposedHelpers.findClass("com.sonelli.juicessh.models.User", cl)
+                                        .getDeclaredConstructor()
+                                        .newInstance();
+                            }
+
+                            Method onUser = callback.getClass().getMethod("b", user.getClass());
+                            onUser.setAccessible(true);
+                            onUser.invoke(callback, user);
+                            return null;
+                        }
+                    });
+            log("hooked pi0.j(Context,p) => local callback, no network refresh");
+        } catch (Throwable t) {
+            log("failed to hook pi0.j", t);
+        }
+    }
+
+    private static void log(String msg) {
+        XposedBridge.log(TAG + ": " + msg);
+        Log.i(TAG, msg);
+    }
+
+    private static void log(String msg, Throwable t) {
+        XposedBridge.log(TAG + ": " + msg + "\n" + Log.getStackTraceString(t));
+        Log.e(TAG, msg, t);
     }
 }

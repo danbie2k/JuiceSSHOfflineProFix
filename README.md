@@ -1,18 +1,18 @@
-# JuiceSSH Offline Pro Fix (libxposed API 101)
+# JuiceSSH Offline Pro Fix (Xposed API 82 branch)
 
-LSPosed/libxposed API 101 module for keeping a legitimate JuiceSSH Pro entitlement usable offline after the original Google/Sonelli verification path disappeared.
+Legacy Xposed/LSPosed API 82-compatible module for keeping a legitimate JuiceSSH Pro entitlement usable offline after the original Google/Sonelli verification path disappeared.
 
 ## Debug APK
 
 Built APK:
 
 ```text
-../dist/JuiceSSHOfflineProFix-api101-debug.apk
+../dist/JuiceSSHOfflineProFix-xposed82-debug.apk
 ```
 
 ## Hooks
 
-Scoped only to:
+Scope in LSPosed should be only:
 
 ```text
 com.sonelli.juicessh
@@ -29,7 +29,7 @@ The module hooks:
 ## Install
 
 ```bash
-adb install -r dist/JuiceSSHOfflineProFix-api101-debug.apk
+adb install -r ../dist/JuiceSSHOfflineProFix-xposed82-debug.apk
 ```
 
 Then in LSPosed:
@@ -45,14 +45,15 @@ cd lsposed-juicessh-offline-pro
 gradle assembleDebug --no-daemon
 ```
 
-The project uses:
+This branch uses legacy metadata:
+
+- `assets/xposed_init`
+- AndroidManifest `xposedmodule`, `xposeddescription`, `xposedminversion=82`
+
+The dependency is a local compile-only stub jar:
 
 ```gradle
-compileOnly 'io.github.libxposed:api:101.0.1'
+compileOnly files('libs/xposed-api-82-stub.jar')
 ```
 
-Modern Xposed metadata is packaged under `META-INF/xposed/`:
-
-- `java_init.list`
-- `scope.list`
-- `module.prop`
+The stub is for compilation only and is not packaged into the APK; the actual Xposed classes are provided by LSPosed/Xposed at runtime.
