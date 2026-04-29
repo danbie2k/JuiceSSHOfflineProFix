@@ -8,6 +8,10 @@ This project is intended for archival, interoperability, and personal recovery u
 
 This project is not affiliated with, endorsed by, or supported by Sonelli Ltd., JuiceSSH, Google, LSPosed, or Xposed.
 
+## License
+
+This project is licensed under the GNU Affero General Public License v3.0 or later. See [LICENSE](LICENSE).
+
 ## Release APK
 
 Download the signed APK from GitHub Releases:
