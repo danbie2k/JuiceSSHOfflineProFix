@@ -10,3 +10,5 @@ debug_lspd/
 
 .pi-lens/
 *.class
+release/*.jks
+release/*.keystore
