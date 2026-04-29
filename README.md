@@ -1,18 +1,36 @@
-# JuiceSSH Offline Pro Fix (Xposed API 82 branch)
+# JuiceSSH Offline Pro Fix
 
 Legacy Xposed/LSPosed API 82-compatible module for keeping a legitimate JuiceSSH Pro entitlement usable offline after the original Google/Sonelli verification path disappeared.
 
-## Debug APK
+## Disclaimer
 
-Built APK:
+This project is intended for archival, interoperability, and personal recovery use by people who legitimately own JuiceSSH Pro / Pro Pack and need continued access after the original app, backend, and Google Play purchase flow became unavailable. Do not use it to obtain paid functionality you did not purchase or are not entitled to. You are responsible for complying with all applicable laws, licenses, and terms in your jurisdiction.
+
+This project is not affiliated with, endorsed by, or supported by Sonelli Ltd., JuiceSSH, Google, LSPosed, or Xposed.
+
+## Release APK
+
+Download the signed APK from GitHub Releases:
 
 ```text
-../dist/JuiceSSHOfflineProFix-xposed82-debug.apk
+JuiceSSHOfflineProFix-v1.0-xposed82-release.apk
 ```
+
+Package:
+
+```text
+org.lyf.juicesshofflinepro
+```
+
+Compatibility:
+
+- Xposed API 82 / LSPosed legacy module API
+- `minSdk 26` to match JuiceSSH 3.2.2
+- `targetSdk 36`
 
 ## Hooks
 
-Scope in LSPosed should be only:
+Recommended LSPosed scope is declared by the module as:
 
 ```text
 com.sonelli.juicessh
@@ -22,20 +40,26 @@ The module hooks:
 
 - `com.sonelli.oi0.d(Object)` -> `true` (central Pro check)
 - `com.sonelli.juicessh.models.User.H()` -> `true` (local user signature gate)
-- `User.w()` -> ten years of remaining session time (prevents dead API refresh)
+- `User.w()` -> configurable future session time (prevents dead API refresh)
 - `com.sonelli.pi0.m(Context)` -> `true`
 - `com.sonelli.pi0.j(Context, pi0.p)` -> calls the callback with the local user instead of forcing the dead network refresh path
+
+## Settings
+
+The module includes a minimal native Android settings page with no extra UI libraries. Defaults are suitable for most cases.
+
+After changing settings, force-stop and reopen JuiceSSH. Some LSPosed versions may require a reboot.
 
 ## Install
 
 ```bash
-adb install -r ../dist/JuiceSSHOfflineProFix-xposed82-debug.apk
+adb install -r JuiceSSHOfflineProFix-v1.0-xposed82-release.apk
 ```
 
 Then in LSPosed:
 
 1. Enable `JuiceSSH Offline Pro Fix`.
-2. Scope it to `JuiceSSH` / `com.sonelli.juicessh`.
+2. Confirm the scope includes `JuiceSSH` / `com.sonelli.juicessh`.
 3. Force-stop and reopen JuiceSSH, or reboot.
 
 ## Build
@@ -48,7 +72,7 @@ gradle assembleDebug --no-daemon
 This branch uses legacy metadata:
 
 - `assets/xposed_init`
-- AndroidManifest `xposedmodule`, `xposeddescription`, `xposedminversion=82`
+- AndroidManifest `xposedmodule`, `xposeddescription`, `xposedminversion=82`, `xposedscope`
 
 The dependency is a local compile-only stub jar:
 
