@@ -12,7 +12,7 @@ Alias:
 org.lyf.juicesshofflinepro.release
 ```
 
-Passwords are stored in macOS Keychain, not in this repo:
+Passwords are stored in macOS Keychain, not in this repo. This PKCS12 keystore uses the same value for store password and key password:
 
 ```bash
 security find-generic-password -a org.lyf.juicesshofflinepro -s org.lyf.juicesshofflinepro.release.storepass -w
