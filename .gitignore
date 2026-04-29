@@ -7,3 +7,6 @@ local.properties
 
 app/.pi-lens/
 debug_lspd/
+
+.pi-lens/
+*.class

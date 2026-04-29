@@ -1,13 +1,13 @@
 plugins { id 'com.android.application' }
 
 android {
-    namespace 'com.owner.juicesshofflinepro'
-    compileSdk 35
+    namespace 'org.lyf.juicesshofflinepro'
+    compileSdk 36
 
     defaultConfig {
-        applicationId 'com.owner.juicesshofflinepro'
+        applicationId 'org.lyf.juicesshofflinepro'
         minSdk 26
-        targetSdk 35
+        targetSdk 36
         versionCode 1
         versionName '1.0'
     }

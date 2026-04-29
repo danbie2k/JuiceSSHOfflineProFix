@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JuiceSSH 离线专业版修复</string>
+    <string name="module_description">在原 Google/Sonelli 验证路径失效后，让你合法拥有的 JuiceSSH Pro 权益继续离线可用。</string>
+    <string name="settings_hint">修改后请强制停止并重新打开 JuiceSSH；部分 LSPosed 版本可能需要重启。默认值适合大多数情况。</string>
+    <string name="hook_pro_check">Hook 专业版检查：oi0.d(Object) -&gt; true</string>
+    <string name="hook_user_signature">Hook 用户签名：User.H() -&gt; true</string>
+    <string name="hook_session_expiry">Hook 会话过期：User.w() -&gt; 未来时间</string>
+    <string name="hook_api_gate">Hook API 入口：避开已失效的 Sonelli 网络刷新</string>
+    <string name="session_years">会话有效年数</string>
+    <string name="save">保存</string>
+    <string name="restore_defaults">恢复默认</string>
+    <string name="saved_restart_juicessh">已保存。请重启 JuiceSSH。</string>
+</resources>
